@@ -104,6 +104,7 @@ from sklearn.preprocessing import StandardScaler
 #Modeling Libraries
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
+from sklearn import metrics
 from sklearn.metrics import r2_score
 
 # URL of the raw CSV file
@@ -667,17 +668,17 @@ def train_and_predict(X, Y):
     # Predict the target variable on the test data
     y_pred = model.predict(X_test)
 
-    return y_pred, y_test, model
+    return y_pred, y_test, model, X_train
 
 """### Transformed Data"""
 
-y_pred_td, y_test_td, model_td = train_and_predict(X_td, Y_td)
+y_pred_td, y_test_td, model_td, X_train_td = train_and_predict(X_td, Y_td)
 
 # Retrieve the coefficients (weights) of the trained linear regression model
 coefficient = model_td.coef_
 
 # Retrieve the column names of the features (independent variables)
-cols = X_train.columns
+cols = X_train_td.columns
 
 # Create a DataFrame to visualize the coefficients along with the feature names
 coefficient_df = pd.DataFrame({'Feature': cols, 'Coefficient': coefficient})
@@ -686,28 +687,30 @@ coefficient_df
 
 """### Cleaned Data"""
 
-y_pred_cd, y_test_cd, model_cd = train_and_predict(X_cd, Y_cd)
+y_pred_cd, y_test_cd, model_cd, X_train_cd = train_and_predict(X_cd, Y_cd)
 
 # Retrieve the coefficients (weights) of the trained linear regression model
 coefficient = model_cd.coef_
 
 # Retrieve the column names of the features (independent variables)
-cols = X_train.columns
+cols = X_train_cd.columns
 
 # Create a DataFrame to visualize the coefficients along with the feature names
 coefficient_df = pd.DataFrame({'Feature': cols, 'Coefficient': coefficient})
 
 coefficient_df
 
+
+
 """### Scaled adn Cleaned Data"""
 
-y_pred_scd, y_test_scd, model_scd = train_and_predict(X_scd, Y_scd)
+y_pred_scd, y_test_scd, model_scd, X_train_scd = train_and_predict(X_scd, Y_scd)
 
 # Retrieve the coefficients (weights) of the trained linear regression model
 coefficient = model_scd.coef_
 
 # Retrieve the column names of the features (independent variables)
-cols = X_train.columns
+cols = X_train_scd.columns
 
 # Create a DataFrame to visualize the coefficients along with the feature names
 coefficient_df = pd.DataFrame({'Feature': cols, 'Coefficient': coefficient})
